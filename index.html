@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LetOut</title>
+    <title>My Apple-like Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -40,6 +40,83 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: 700;
+        }
+
+        .menu-btn {
+            display: none;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-btn span,
+        .menu-btn span:before,
+        .menu-btn span:after {
+            content: '';
+            display: block;
+            height: 4px;
+            width: 30px;
+            background-color: #fff;
+            position: absolute;
+        }
+
+        .menu-btn span:before {
+            top: -10px;
+        }
+
+        .menu-btn span:after {
+            bottom: -10px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            transition: left 0.3s;
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu ul li {
+            padding: 15px 20px;
+        }
+
+        .mobile-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+
+        .menu-overlay.active {
+            display: block;
         }
 
         .hero-section {
@@ -82,9 +159,9 @@
             border-radius: 10px;
             flex: 1;
             min-width: 300px;
-            height: 440px;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
         .block-item img {
@@ -94,12 +171,20 @@
 
         .block-item a {
             position: absolute;
-            bottom: 10px;
-            left: 160px;
-            color: black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-decoration: none;
-            font-size: 22px;
-            text-align: center;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .block-item a:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .footer {
@@ -108,43 +193,83 @@
             text-align: center;
             padding: 20px 0;
         }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
+        <div class="menu-btn">
+            <span></span>
+        </div>
         <ul>
-            <li><a href="#">Главное Меню</a></li>
-            <li><a href="#">Ивенты</a></li>
-            <li><a href="#">Про Нас</a></li>
-            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="https://www.instagram.com/letout.kz/">Products</a></li>
+            <li><a href="https://www.instagram.com/letout.kz/">About</a></li>
+            <li><a href="https://www.instagram.com/letout.kz/">Contact</a></li>
         </ul>
     </div>
 
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="https://www.instagram.com/letout.kz/">Products</a></li>
+            <li><a href="https://www.instagram.com/letout.kz/">About</a></li>
+            <li><a href="https://www.instagram.com/letout.kz/">Contact</a></li>
+        </ul>
+    </div>
+    <div class="menu-overlay"></div>
+
     <div class="hero-section">
-        <h1></h1>
+        <h1>Welcome to My Website</h1>
     </div>
 
     <div class="content-section">
-        <h2>Быстрые Ссылки</h2>
+        <h2>Explore Our Products</h2>
         <div class="block">
             <div class="block-item">
                 <img src="img/image3.jpg" alt="Product 1">
-                <a href="#">Ивенты</a>
+                <a href="https://www.instagram.com/letout.kz/">Learn More</a>
             </div>
             <div class="block-item">
                 <img src="img/image4.jpg" alt="Product 2">
-                <a href="#">Маршруты</a>
+                <a href="https://www.instagram.com/letout.kz/">Learn More</a>
             </div>
             <div class="block-item">
                 <img src="img/image5.jpg" alt="Product 3">
-                <a href="#">Квесты</a>
+                <a href="https://www.instagram.com/letout.kz/">Learn More</a>
             </div>
         </div>
     </div>
 
     <div class="footer">
-        <p>&copy; LetOut Product</p>
+        <p>&copy; 2024 My Website. All rights reserved.</p>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuBtn = document.querySelector('.menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuOverlay = document.querySelector('.menu-overlay');
+
+            menuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+            });
+
+            menuOverlay.addEventListener('click', function () {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
